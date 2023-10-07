@@ -4,6 +4,7 @@ import axios from 'axios'
 import {ref, onBeforeMount, reactive} from 'vue'
 import {useProduct} from "../stores/productStore.js";
 import {storeToRefs} from "pinia";
+import router from "../router";
 
 const pro=useProduct();
 
@@ -42,7 +43,7 @@ const Header = [
 
 function itemView(id){
 
-  pro.getSingleProductDetails(id);
+  router.push({name:'productDetails',params:{id:id}})
 
 }
 

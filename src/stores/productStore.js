@@ -38,6 +38,8 @@ export const useProduct = defineStore('product', {
 
 
         async getSingleProductDetails(productId ) {
+            console.log("OurID",productId);
+
             try {
                 const res = await axios.get(`https://dummyjson.com/products/${productId}`);
                 if (res.status === 200) {

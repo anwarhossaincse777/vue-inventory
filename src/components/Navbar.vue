@@ -2,35 +2,48 @@
 import router from "../router";
 import { useAuth } from "../stores/auth";
 import { ElMessage, ElNotification } from "element-plus";
+import Swal from "sweetalert2";
 
 const auth = useAuth();
 function logOut() {
-  const success = auth.logout();
-  if (success) {
-    router.push({ name: "login" });
-    ElNotification({
-      title: "Success",
-      message: "You have Successfully Logged Out",
-      type: "success",
-      position: "top-right",
-      duration: 2000,
-    });
-  } else {
-    ElMessage({
-      type: "error",
-      message: "Something went wrong",
-    });
-  }
+
+  Swal.fire({
+    title: 'Are you sure To Log Out?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const success = auth.logout();
+
+      if (success) {
+        router.push({ name: "login" });
+      Swal.fire(
+          'success!',
+          'You have successfully logOut',
+          'success'
+      )
+    }else{
+
+        Swal.fire(
+            'error!',
+            'Something went wrong',
+            'success'
+        )
+      }
+    }
+
+  })
 }
 </script>
 
 <template>
-  <nav class="bg-slate-900 sticky top-0 shadow-lg border-b border-b-slate-500">
-    <div
-      class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4"
-    >
+  <nav class="bg-slate-900 z-50 sticky top-0 shadow-lg border-b border-b-slate-500">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
       <RouterLink :to="{ name: 'dashboard' }" class="flex items-center">
-        <h2 class="text-2xl text-white">ComLogo</h2>
+        <h2 class="text-2xl text-white">DashBoard</h2>
       </RouterLink>
 
       <div class="flex items-center space-x-2">
@@ -79,7 +92,7 @@ function logOut() {
                 d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <span>Akhi</span>
+            <span>Sumon</span>
           </button>
           <ul
             class="dropdown-menu absolute hidden text-center border bg-slate-500 text-slate-300 p-1"

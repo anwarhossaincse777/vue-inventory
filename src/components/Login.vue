@@ -2,7 +2,7 @@
 import { reactive, ref } from "vue";
 import { useAuth } from "../stores/auth";
 import router from "../router";
-import { ElMessage, ElNotification } from "element-plus";
+import Swal from "sweetalert2";
 
 const loginForm = reactive({
   userEmail: "",
@@ -23,24 +23,26 @@ function submitFrom() {
       router.push({ name: "dashboard" });
       auth.isLoggedIn = true;
 
-      ElNotification({
-        title: "Success",
-        message: "You have Successfully Logged In",
-        type: "success",
-        position: "top-right",
-        duration: 2000,
-      });
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'You have successfully Logged In',
+        timer: 1000
+      })
     } else {
-      ElMessage({
-        type: "error",
-        message: `No record Match with this ${loginForm.userEmail} & Password `,
+      Swal.fire({
+        title: 'Error!',
+        text: `No record Match with this ${loginForm.userEmail} & Password `,
+        icon: 'error',
       });
     }
   } else {
-    ElMessage({
-      type: "error",
-      message: "Something went wrong",
-    });
+    Swal.fire({
+      title: 'Error!',
+      text: 'Something Went wrong',
+      icon: 'error',
+      confirmButtonText: 'Cool'
+    })
   }
 }
 

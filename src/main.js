@@ -1,6 +1,10 @@
 import "./assets/main.css";
-import "element-plus/dist/index.css";
-import ElementPlus from "element-plus";
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css'
@@ -16,9 +20,11 @@ pinia.use(piniaPluginPersistedstate);
 
 const app = createApp(App);
 
-app.use(ElementPlus);
+
 app.component('EasyDataTable', Vue3EasyDataTable);
 app.use(pinia);
 app.use(router);
+app.use(VueSweetalert2);
+app.use(toast)
 
 app.mount("#app");

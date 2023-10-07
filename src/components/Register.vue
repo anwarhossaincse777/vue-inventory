@@ -2,7 +2,8 @@
 import { reactive, ref } from "vue";
 import { useAuth } from "../stores/auth";
 import router from "../router";
-import { ElMessage, ElNotification } from "element-plus";
+
+import Swal from "sweetalert2";
 
 const registerForm = reactive({
   newUserEmail: "",
@@ -20,27 +21,30 @@ const auth = useAuth();
 function submitRegisterFrom() {
   // Perform password matching validation
   if (registerForm.newPassword !== registerForm.conformPassword) {
-    ElMessage({
-      type: "error",
-      message: "Passwords do not match. Please try again.",
-      position: "top-right",
+    Swal.fire({
+      title: 'Error!',
+      text: "Passwords do not match. Please try again.",
+      icon: 'error',
+      confirmButtonText: 'Cool'
     });
+
   } else {
     const success = auth.register(registerForm);
     if (success) {
       router.push({ name: "dashboard" });
-      ElNotification({
-        title: "Success",
-        message:
-          "Congratulations !! You have successfully Complete Your registration",
-        type: "success",
-        position: "top-right",
-        duration: 2000,
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '  "Congratulations !! You have successfully Complete Your registration",',
+        timer: 1000
       });
+
     } else {
-      ElMessage({
-        type: "info",
-        message: "Something went wrong",
+      Swal.fire({
+        title: 'Error!',
+        text: 'Something Went wrong',
+        icon: 'error',
+        confirmButtonText: 'Cool'
       });
     }
   }
@@ -91,7 +95,7 @@ function validatePassword(confirmPassword) {
               required
               @blur="validateEmail(registerForm.newUserEmail)"
             />
-            <span class="text-slate-500">{{ msg }}</span>
+            <span class="text-red-500">{{ msg }}</span>
           </div>
           <div class="mb-4 w-80">
             <label
@@ -127,7 +131,7 @@ function validatePassword(confirmPassword) {
               placeholder="******************"
               @blur="validatePassword(registerForm.conformPassword)"
             />
-            <span class="text-whitw">{{ pasMsg }}</span>
+            <span class="text-red-500">{{ pasMsg }}</span>
           </div>
           <div class="flex items-center justify-between">
             <button
