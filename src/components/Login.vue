@@ -4,6 +4,11 @@ import { useAuth } from "../stores/auth";
 import router from "../router";
 import Swal from "sweetalert2";
 
+
+import { createToaster } from "@meforma/vue-toaster";
+
+const toaster = createToaster({ /* options */ });
+
 const loginForm = reactive({
   userEmail: "",
   password: "",
@@ -23,12 +28,8 @@ function submitFrom() {
       router.push({ name: "dashboard" });
       auth.isLoggedIn = true;
 
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'You have successfully Logged In',
-        timer: 1000
-      })
+      toaster.show(`You have successfully Logged In`,{type:"success",position:"top"});
+
     } else {
       Swal.fire({
         title: 'Error!',

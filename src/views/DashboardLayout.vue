@@ -1,12 +1,19 @@
 <script setup>
-import Navbar from "../components/Navbar.vue";
-import SideBar from "../components/SideBar.vue";
+import MasterLayout from "../components/MasterLayout.vue";
 </script>
 
 <template>
-  <Navbar />
-  <SideBar />
+  <MasterLayout/>
+  <div class="w mt-10 mb-5">
   <slot />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.w{
+  width: 1052px;
+  margin-left:275px;
+}
+
+</style>

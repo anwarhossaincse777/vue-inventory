@@ -2,6 +2,9 @@
 import { reactive, ref } from "vue";
 import { useAuth } from "../stores/auth";
 import router from "../router";
+import { createToaster } from "@meforma/vue-toaster";
+
+const toaster = createToaster({ /* options */ });
 
 import Swal from "sweetalert2";
 
@@ -32,12 +35,7 @@ function submitRegisterFrom() {
     const success = auth.register(registerForm);
     if (success) {
       router.push({ name: "dashboard" });
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: '  "Congratulations !! You have successfully Complete Your registration",',
-        timer: 1000
-      });
+      toaster.show(`You have successfully complete Your Registration`,{type:"success",position:"top"});
 
     } else {
       Swal.fire({

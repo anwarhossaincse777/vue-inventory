@@ -1,24 +1,34 @@
 <script setup>
 import { useAuth } from "../stores/auth";
+import BarChartComponent from "./chart/BarChartComponent.vue";
+import PieChartComponent from "./chart/PieChartComponent.vue";
+import LineChartComponent from "./chart/LineChartComponent.vue";
+import DoughnutChartComponent from "./chart/DoughnutChartComponent.vue";
 
 const auth = useAuth();
 </script>
 
 <template>
-  <div
-    class="bg-white h-screen flex justify-center items-center p-4 sm:ml-64"
-  >
-    <div
-      class="p-5 md:p-10 text-center bg-white bg-opacity-60 border-slate-700 border-2 border-dashed rounded-lg"
-    >
-      <h1 class="text-center text-4xl font-bold">Welcome To Admin Panel</h1>
-      <br />
-      <h1 class="font-bold">
-        Your Email is :
-        <span class="font-normal italic">{{ auth.user.newUserEmail }}</span>
-      </h1>
+
+
+  <div id="main" class="grid grid-rows-2 grid-flow-col">
+    <div>
+      <BarChartComponent/>
     </div>
+    <div>
+      <LineChartComponent/>
+    </div>
+    <div>
+      <PieChartComponent/>
+
+    </div>
+    <div>
+      <DoughnutChartComponent/>
+    </div>
+
   </div>
+
+
 </template>
 
 <style scoped></style>
